@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "fcd365ae-b62f-4d9c-91be-1baa04bcc430",
+		"name": "Attack Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Attack signatures",
+			"item": [
+				{
+					"name": "SQL Injection: commit; (Header)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Referer",
+								"value": "v=commit     ;",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SQL Injection: End Tansaction (Parameter)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/?v%3Daa%20end%20transaction%20aaa",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "v%3Daa%20end%20transaction%20aaa",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Evasion Technique",
+			"item": [
+				{
+					"name": "Directory traversal up root",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/one/../object.html",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"one",
+								"..",
+								"object.html"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Malformed Request",
+			"item": [
+				{
+					"name": "Malformed XML content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<?xml version=\"1.0\"?><envelope><subject>Your order <num>1032</num></subject><letter>Dear Mr.<name>John Smith</>.Your order <orderid>1032</orderid>will be &lt;sCript shipped on <shipdate>2001-07-13</shipdate>. </letter><logo>image.gif</logo></envelope>"
+						},
+						"url": {
+							"raw": "{{host}}/xml_profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"xml_profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JSON",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : }}\"String.fromCharCode\" }"
+						},
+						"url": {
+							"raw": "{{host}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Shape protected endpoint",
+			"item": [
+				{
+					"name": "POST to /user/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "blah",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "blahblah",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST to /user/password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "blah",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "blahblah",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/user/password",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0e822884-3f4d-4ff2-9f2b-e6689749d96d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "56d707e1-79e8-44ad-96a0-c9fd58c042d9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f451b59e-5f72-49f1-bcbd-02da8137d19b",
+			"key": "host",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
